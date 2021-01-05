@@ -13,14 +13,21 @@ struct ContentView: View {
     @State private var accuracy: String = "Accuracy 0%"
     
     var body: some View {
+        let captureSession = AVCaptureSession()
         
         VStack {
-            Image("Photos-new-icon")
+            CameraPreview(session: captureSession)
+            //Image("Photos-new-icon")
             Text(objectName)
             Text(accuracy)
         }
         .padding()
-
+        .onAppear() {
+            guard let captureDevice = AVCaptureDevice.default(for: .video) else {return}
+            guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {return}
+            captureSession.addInput(input)
+            captureSession.startRunning()
+        }
     }
 }
 
@@ -52,7 +59,7 @@ struct CameraPreview: UIViewRepresentable {
     func makeUIView(context: Context) -> VideoPreviewView {
         let view = VideoPreviewView()
         view.backgroundColor = .black
-        view.videoPreviewLayer.cornerRadius = 0
+        view.videoPreviewLayer.cornerRadius = 15
         view.videoPreviewLayer.session = session
         view.videoPreviewLayer.connection?.videoOrientation = .portrait
         
