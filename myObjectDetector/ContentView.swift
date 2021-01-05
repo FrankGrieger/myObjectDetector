@@ -40,6 +40,7 @@ struct ContentView_Previews: PreviewProvider {
 // create a camera preview view
 struct CameraPreview: UIViewRepresentable {
     // create a UIView subclass
+    
     class VideoPreviewView: UIView {
         //We wan't the view's core animation layer to be of type AVCaptureVideoPreviewLayer
         //That is why we override the UIView's layer type
@@ -58,10 +59,7 @@ struct CameraPreview: UIViewRepresentable {
     
     func makeUIView(context: Context) -> VideoPreviewView {
         let view = VideoPreviewView()
-        view.backgroundColor = .black
-        view.videoPreviewLayer.cornerRadius = 15
         view.videoPreviewLayer.session = session
-        view.videoPreviewLayer.connection?.videoOrientation = .portrait
         
         return view
     }
