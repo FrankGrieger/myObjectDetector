@@ -59,8 +59,9 @@ struct CameraPreview: UIViewRepresentable {
     
     func makeUIView(context: Context) -> VideoPreviewView {
         let view = VideoPreviewView()
+        view.backgroundColor = .black
         view.videoPreviewLayer.session = session
-        
+
         return view
     }
     
