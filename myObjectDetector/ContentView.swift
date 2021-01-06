@@ -20,7 +20,6 @@ struct ContentView: View {
             Text(objectName)
             Text(accuracy)
         }
-        .padding()
     }
 }
 
