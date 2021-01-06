@@ -13,18 +13,17 @@ final class CameraViewController: UIViewController, UIViewControllerRepresentabl
     let cameraController = CameraController()
     var previewView: UIView!
     
-    override func viewDidLoad() {
-        //previewView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
-        previewView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        //previewView.contentMode = UIView.ContentMode.scaleAspectFit
-        view.backgroundColor = .black
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        previewView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height))
+        
         view.addSubview(previewView)
         
         cameraController.prepare { (error) in
             if let error = error {
                 print(error)
-            }
-            
+            }            
             try? self.cameraController.displayPreview(on: self.previewView)
         }
     }
