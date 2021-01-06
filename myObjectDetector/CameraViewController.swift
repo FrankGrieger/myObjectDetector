@@ -18,6 +18,7 @@ final class CameraViewController: UIViewController, UIViewControllerRepresentabl
         
         previewView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height))
         
+        view.backgroundColor = .black
         view.addSubview(previewView)
         
         cameraController.prepare { (error) in
