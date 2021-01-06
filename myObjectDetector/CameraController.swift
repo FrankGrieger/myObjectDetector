@@ -14,9 +14,10 @@ class CameraController: NSObject {
     var previewLayer: AVCaptureVideoPreviewLayer?
     
     enum CameraControllerError: Swift.Error {
-        case noCaptureSession
-        case noCaptureDevice
-        case noCaptureInput
+        case noSession
+        case noDevice
+        case noInput
+        case notRunning
         case unknown
     }
 
@@ -24,23 +25,18 @@ class CameraController: NSObject {
         func createCaptureSession() {
             self.captureSession = AVCaptureSession()
         }
-        func configureCaptureDevice() throws {
-            let captureDevice = AVCaptureDevice.default(for: .video)
-            
-            try captureDevice?.lockForConfiguration()
-            captureDevice?.unlockForConfiguration()
-            
-            self.captureDevice = captureDevice
+        func createCaptureDevice() {
+            self.captureDevice = AVCaptureDevice.default(for: .video)
         }
-        func configureDeviceInput() throws {
+        func startCapture() throws {
             guard let captureSession = self.captureSession else {
-                throw CameraControllerError.noCaptureSession
+                throw CameraControllerError.noSession
             }
             guard let captureDevice = self.captureDevice else {
-                throw CameraControllerError.noCaptureDevice
+                throw CameraControllerError.noDevice
             }
             guard let captureInput = try? AVCaptureDeviceInput(device: captureDevice) else {
-                throw CameraControllerError.noCaptureInput
+                throw CameraControllerError.noInput
             }
             
             captureSession.addInput(captureInput)
@@ -50,8 +46,8 @@ class CameraController: NSObject {
         DispatchQueue(label: "prepare").async {
             do {
                 createCaptureSession()
-                try configureCaptureDevice()
-                try configureDeviceInput()
+                createCaptureDevice()
+                try startCapture()
             } catch {
                 DispatchQueue.main.async {
                     completion(error)
@@ -64,9 +60,10 @@ class CameraController: NSObject {
             }
         }
     }
+    
     func displayPreview(on view: UIView) throws {
         guard let captureSession = self.captureSession, captureSession.isRunning else {
-            throw CameraControllerError.noCaptureSession
+            throw CameraControllerError.notRunning
         }
         self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         
