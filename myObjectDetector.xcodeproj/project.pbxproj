@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		554B4EFF25A5978800CF2E2C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4EFE25A5978800CF2E2C /* CameraViewController.swift */; };
 		554B4F0225A5B69800CF2E2C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4F0125A5B69800CF2E2C /* CameraController.swift */; };
+		5551D40225A7106D008CD598 /* .xcodesamplecode.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5551D40125A7106D008CD598 /* .xcodesamplecode.plist */; };
 		556E44D925936D58008EBF4C /* myObjectDetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */; };
 		556E44DB25936D58008EBF4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556E44DA25936D58008EBF4C /* ContentView.swift */; };
 		556E44DD25936D59008EBF4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556E44DC25936D59008EBF4C /* Assets.xcassets */; };
 		556E44E025936D59008EBF4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556E44DF25936D59008EBF4C /* Preview Assets.xcassets */; };
+		55A9538C25A6DAEF00D1E564 /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 55A9538B25A6DAEF00D1E564 /* Resnet50.mlmodel */; };
+		55A953A425A7035600D1E564 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 55A953A325A7035600D1E564 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		554B4EFE25A5978800CF2E2C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		554B4F0125A5B69800CF2E2C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		5551D40125A7106D008CD598 /* .xcodesamplecode.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = .xcodesamplecode.plist; sourceTree = "<group>"; };
 		556E44D525936D58008EBF4C /* myObjectDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myObjectDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myObjectDetectorApp.swift; sourceTree = "<group>"; };
 		556E44DA25936D58008EBF4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		556E44DC25936D59008EBF4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		556E44DF25936D59008EBF4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		556E44E125936D59008EBF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55A9538B25A6DAEF00D1E564 /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
+		55A953A325A7035600D1E564 /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; fileEncoding = 4; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +46,8 @@
 		556E44CC25936D58008EBF4C = {
 			isa = PBXGroup;
 			children = (
+				55A953A325A7035600D1E564 /* README.md */,
+				5551D40125A7106D008CD598 /* .xcodesamplecode.plist */,
 				556E44D725936D58008EBF4C /* myObjectDetector */,
 				556E44D625936D58008EBF4C /* Products */,
 			);
@@ -56,13 +64,13 @@
 		556E44D725936D58008EBF4C /* myObjectDetector */ = {
 			isa = PBXGroup;
 			children = (
+				55A9538B25A6DAEF00D1E564 /* Resnet50.mlmodel */,
 				556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */,
 				556E44DA25936D58008EBF4C /* ContentView.swift */,
 				554B4EFE25A5978800CF2E2C /* CameraViewController.swift */,
-				556E44DC25936D59008EBF4C /* Assets.xcassets */,
-				556E44E125936D59008EBF4C /* Info.plist */,
-				556E44DE25936D59008EBF4C /* Preview Content */,
 				554B4F0125A5B69800CF2E2C /* CameraController.swift */,
+				55A9538F25A6E48A00D1E564 /* Supporting Files */,
+				556E44DE25936D59008EBF4C /* Preview Content */,
 			);
 			path = myObjectDetector;
 			sourceTree = "<group>";
@@ -73,6 +81,15 @@
 				556E44DF25936D59008EBF4C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		55A9538F25A6E48A00D1E564 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				556E44DC25936D59008EBF4C /* Assets.xcassets */,
+				556E44E125936D59008EBF4C /* Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +150,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				556E44E025936D59008EBF4C /* Preview Assets.xcassets in Resources */,
+				55A953A425A7035600D1E564 /* README.md in Resources */,
+				5551D40225A7106D008CD598 /* .xcodesamplecode.plist in Resources */,
 				556E44DD25936D59008EBF4C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A9538C25A6DAEF00D1E564 /* Resnet50.mlmodel in Sources */,
 				556E44DB25936D58008EBF4C /* ContentView.swift in Sources */,
 				556E44D925936D58008EBF4C /* myObjectDetectorApp.swift in Sources */,
 				554B4F0225A5B69800CF2E2C /* CameraController.swift in Sources */,
@@ -279,7 +299,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"myObjectDetector/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Y2D2K2S86;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = myObjectDetector/Info.plist;
+				INFOPLIST_FILE = "myObjectDetector/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -301,7 +321,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"myObjectDetector/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Y2D2K2S86;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = myObjectDetector/Info.plist;
+				INFOPLIST_FILE = "myObjectDetector/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

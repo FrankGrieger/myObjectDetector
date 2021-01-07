@@ -7,8 +7,11 @@
 
 import UIKit
 import AVFoundation
+import CoreData
+import Vision
 
-class CameraController: NSObject {
+
+class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     var captureSession: AVCaptureSession?
     var captureDevice: AVCaptureDevice?
     var previewLayer: AVCaptureVideoPreviewLayer?
@@ -18,6 +21,9 @@ class CameraController: NSObject {
         case noDevice
         case noInput
         case notRunning
+        case noBuffer
+        case noClassifier
+        case noModel
         case unknown
     }
 
@@ -69,5 +75,23 @@ class CameraController: NSObject {
         
         view.layer.insertSublayer(self.previewLayer!, at: 0)
         self.previewLayer?.frame = view.frame
+    }
+    
+    func captureOutput (_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) throws {
+        guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            throw CameraControllerError.noBuffer
+        }
+        guard let classifier: Resnet50 = try? Resnet50(configuration: MLModelConfiguration()) else {
+            throw CameraControllerError.noClassifier
+        }
+        guard let model = try? VNCoreMLModel(for: classifier.model) else {
+            throw CameraControllerError.noModel
+        }
+
+        
+
+        
+        //here comes the code for the model
+        
     }
 }

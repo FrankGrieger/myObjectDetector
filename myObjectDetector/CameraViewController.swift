@@ -7,8 +7,9 @@
 
 import UIKit
 import SwiftUI
+import AVFoundation
 
-final class CameraViewController: UIViewController, UIViewControllerRepresentable {
+final class CameraViewController: UIViewController {
     
     let cameraController = CameraController()
     var previewView: UIView!
@@ -28,6 +29,9 @@ final class CameraViewController: UIViewController, UIViewControllerRepresentabl
             try? self.cameraController.displayPreview(on: self.previewView)
         }
     }
+}
+
+extension CameraViewController: UIViewControllerRepresentable {
     
     public func makeUIViewController(context: UIViewControllerRepresentableContext<CameraViewController>) -> CameraViewController {
         return CameraViewController()
@@ -36,5 +40,6 @@ final class CameraViewController: UIViewController, UIViewControllerRepresentabl
     public func updateUIViewController(_ uiViewController: CameraViewController, context: UIViewControllerRepresentableContext<CameraViewController>) {
         //some code
     }
+    
 }
 
