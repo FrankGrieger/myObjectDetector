@@ -24,10 +24,11 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         case noBuffer
         case noClassifier
         case noModel
+        case noViewController
         case unknown
     }
 
-    func prepare(completion: @escaping (Error?) -> Void) {
+    func prepare(completionHandler: @escaping (Error?) -> Void) {
         func createCaptureSession() {
             self.captureSession = AVCaptureSession()
         }
@@ -56,13 +57,13 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 try startCapture()
             } catch {
                 DispatchQueue.main.async {
-                    completion(error)
+                    completionHandler(error)
                 }
                 return
             }
             
             DispatchQueue.main.async {
-                completion(nil)
+                completionHandler(nil)
             }
         }
     }
@@ -77,7 +78,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         self.previewLayer?.frame = view.frame
     }
     
-    func captureOutput (_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) throws {
+    private func captureOutput (_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) throws {
         guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             throw CameraControllerError.noBuffer
         }
@@ -87,11 +88,24 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let model = try? VNCoreMLModel(for: classifier.model) else {
             throw CameraControllerError.noModel
         }
+        
+        let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
+            try? self?.processClassifications(for: request, error: error)
+        })
+        request.imageCropAndScaleOption = .centerCrop
+        
+        try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+    }
+    
+    func processClassifications(for request: VNRequest, error: Error?) throws {
 
-        
-
-        
-        //here comes the code for the model
-        
+        DispatchQueue.main.async {
+                guard let results = request.results else {
+                    //self.classificationLabel.text = "Unable to classify image.\n\(error!.localizedDescription)"
+                    return
+                }
+                // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
+                let classifications = results as! [VNClassificationObservation]
+        }
     }
 }

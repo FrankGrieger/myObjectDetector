@@ -10,6 +10,9 @@ some text to go here
 
 [100 Days of Swift](https://www.hackingwithswift.com/100/swiftui) (Paul Hudson)
 
+[iOS MVVM Tutorial](https://www.raywenderlich.com/6733535-ios-mvvm-tutorial-refactoring-from-mvc) (Chuck Krutsinger)
+
 [Making a Custom Camera in iOS](https://medium.com/@barbulescualex/making-a-custom-camera-in-ios-ea44e3087563) (Alex Barbulescu)
 
 [Core ML Models](https://developer.apple.com/machine-learning/models/) (apple)
+
