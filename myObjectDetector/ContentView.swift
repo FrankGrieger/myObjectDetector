@@ -13,8 +13,6 @@ struct ContentView: View {
     @State private var classification: String = "Object name"
     @State private var accuracy: String = "Accuracy 0%"
     
-    let cameraControler = CameraController()
-    
     var body: some View {
         
         VStack {
