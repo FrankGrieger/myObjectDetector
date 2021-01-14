@@ -4,7 +4,12 @@ Preprocess camera capture using the Vision framework and classify them with a Co
 
 ## Abstract
 
-did I write som text? didn't I?
+The application captures the output of the camera continuously and uses a Mobile ML model to identify objects.
+
+In SwiftUI  camera support is actually relying on the legacy UIKit class. The app uses a UIViewControllerRepresentable instance to create and manage a UIViewController object in the SwiftUI interface. AVCaptureVideoDataOutputSampleBufferDelegate is used to receive captured video sample buffers.
+
+CoreML is used to preprocess the camera output using the Vision framework and to classify it with a Core ML model.
+
 
 ## List of Ressources
 
