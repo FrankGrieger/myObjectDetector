@@ -9,37 +9,65 @@ import UIKit
 import SwiftUI
 import AVFoundation
 
-final class CameraViewController: UIViewController {
-    
-    let cameraController = CameraController()
-    var previewView: UIView!
+var classification = Classification()
+
+class Classification: ObservableObject {
+    @Published var object: String
+    @Published var confidence: String
+
+    init() {
+        object = "Object name"
+        confidence = "100%"
+    }
+}
+
+final class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+
+    let videoQueue = DispatchQueue(label: "VIDEO_QUEUE")
+    let captureSession = AVCaptureSession()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        previewView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height))
+        view.backgroundColor = UIColor.black
         
-        view.backgroundColor = .black
-        view.addSubview(previewView)
+        guard let captureDevice = AVCaptureDevice.default(for: .video) else { return }
         
-        cameraController.prepare { (error) in
-            if let error = error {
-                print(error)
-            }            
-            try? self.cameraController.displayPreview(on: self.previewView)
+        guard let captureInput = try? AVCaptureDeviceInput(device: captureDevice) else { return }
+        
+        captureSession.addInput(captureInput)
+        captureSession.startRunning()
+        
+        let captureDataOutput = AVCaptureVideoDataOutput()
+        captureDataOutput.setSampleBufferDelegate(self, queue: videoQueue)
+        captureSession.addOutput(captureDataOutput)
+        
+        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = view.frame
+        view.layer.addSublayer(previewLayer)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if (captureSession.isRunning) { captureSession.stopRunning() }
+    }
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        DispatchQueue.main.async {
+            classification.object = "Frank"
+            classification.confidence = "not so sure!"
         }
     }
 }
 
 extension CameraViewController: UIViewControllerRepresentable {
+    typealias UIViewControllerType = CameraViewController
     
-    public func makeUIViewController(context: UIViewControllerRepresentableContext<CameraViewController>) -> CameraViewController {
+    func makeUIViewController(context: Context) -> CameraViewController {
         return CameraViewController()
     }
-        
-    public func updateUIViewController(_ uiViewController: CameraViewController, context: UIViewControllerRepresentableContext<CameraViewController>) {
-        //some code
-    }
     
+    func updateUIViewController(_ uiViewController: CameraViewController, context: Context) {
+        uiViewController.view.updateConstraints()
+    }
 }
-

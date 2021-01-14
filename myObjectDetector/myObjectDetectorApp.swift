@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct myObjectDetectorApp: App {
+    //var classification = Classification()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(classification: classification)
         }
     }
 }

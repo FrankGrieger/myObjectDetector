@@ -10,21 +10,24 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @State private var classification: String = "Object name"
-    @State private var accuracy: String = "Accuracy 0%"
-    
+    @StateObject var classification: Classification
+
     var body: some View {
-        
-        VStack {
+
+        VStack{
             CameraViewController()
-            Text(classification)
-            Text(accuracy)
+            Text(classification.object)
+            Text(classification.confidence)
+            /*
+            Text($classification.object.wrappedValue)
+            Text($classification.confidence.wrappedValue)
+             */
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(classification: Classification())
     }
 }

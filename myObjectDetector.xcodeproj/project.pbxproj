@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		554B4EFF25A5978800CF2E2C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4EFE25A5978800CF2E2C /* CameraViewController.swift */; };
-		554B4F0225A5B69800CF2E2C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4F0125A5B69800CF2E2C /* CameraController.swift */; };
 		5551D40225A7106D008CD598 /* .xcodesamplecode.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5551D40125A7106D008CD598 /* .xcodesamplecode.plist */; };
 		556E44D925936D58008EBF4C /* myObjectDetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */; };
 		556E44DB25936D58008EBF4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556E44DA25936D58008EBF4C /* ContentView.swift */; };
@@ -20,7 +19,6 @@
 
 /* Begin PBXFileReference section */
 		554B4EFE25A5978800CF2E2C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		554B4F0125A5B69800CF2E2C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		5551D40125A7106D008CD598 /* .xcodesamplecode.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = .xcodesamplecode.plist; sourceTree = "<group>"; };
 		556E44D525936D58008EBF4C /* myObjectDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myObjectDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myObjectDetectorApp.swift; sourceTree = "<group>"; };
@@ -68,7 +66,6 @@
 				556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */,
 				556E44DA25936D58008EBF4C /* ContentView.swift */,
 				554B4EFE25A5978800CF2E2C /* CameraViewController.swift */,
-				554B4F0125A5B69800CF2E2C /* CameraController.swift */,
 				55A9538F25A6E48A00D1E564 /* Supporting Files */,
 				556E44DE25936D59008EBF4C /* Preview Content */,
 			);
@@ -166,7 +163,6 @@
 				55A9538C25A6DAEF00D1E564 /* Resnet50.mlmodel in Sources */,
 				556E44DB25936D58008EBF4C /* ContentView.swift in Sources */,
 				556E44D925936D58008EBF4C /* myObjectDetectorApp.swift in Sources */,
-				554B4F0225A5B69800CF2E2C /* CameraController.swift in Sources */,
 				554B4EFF25A5978800CF2E2C /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
