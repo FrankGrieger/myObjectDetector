@@ -4,7 +4,7 @@ Preprocess camera capture using the Vision framework and classify them with a Co
 
 ## Abstract
 
-did I write som text?
+did I write som text? didn't I?
 
 ## List of Ressources
 
