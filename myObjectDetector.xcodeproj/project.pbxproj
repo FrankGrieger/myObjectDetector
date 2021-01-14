@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		554B4EFF25A5978800CF2E2C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4EFE25A5978800CF2E2C /* CameraViewController.swift */; };
-		5551D40225A7106D008CD598 /* .xcodesamplecode.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5551D40125A7106D008CD598 /* .xcodesamplecode.plist */; };
 		556E44D925936D58008EBF4C /* myObjectDetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */; };
 		556E44DB25936D58008EBF4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556E44DA25936D58008EBF4C /* ContentView.swift */; };
 		556E44DD25936D59008EBF4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556E44DC25936D59008EBF4C /* Assets.xcassets */; };
@@ -19,7 +18,6 @@
 
 /* Begin PBXFileReference section */
 		554B4EFE25A5978800CF2E2C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		5551D40125A7106D008CD598 /* .xcodesamplecode.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = .xcodesamplecode.plist; sourceTree = "<group>"; };
 		556E44D525936D58008EBF4C /* myObjectDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myObjectDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myObjectDetectorApp.swift; sourceTree = "<group>"; };
 		556E44DA25936D58008EBF4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				55A953A325A7035600D1E564 /* README.md */,
-				5551D40125A7106D008CD598 /* .xcodesamplecode.plist */,
 				556E44D725936D58008EBF4C /* myObjectDetector */,
 				556E44D625936D58008EBF4C /* Products */,
 			);
@@ -148,7 +145,6 @@
 			files = (
 				556E44E025936D59008EBF4C /* Preview Assets.xcassets in Resources */,
 				55A953A425A7035600D1E564 /* README.md in Resources */,
-				5551D40225A7106D008CD598 /* .xcodesamplecode.plist in Resources */,
 				556E44DD25936D59008EBF4C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
