@@ -18,10 +18,6 @@ struct ContentView: View {
             CameraViewController()
             Text(classification.object)
             Text(classification.confidence)
-            /*
-            Text($classification.object.wrappedValue)
-            Text($classification.confidence.wrappedValue)
-             */
         }
     }
 }

@@ -10,6 +10,26 @@ In SwiftUI  camera support is actually relying on the legacy UIKit class. The ap
 
 CoreML is used to preprocess the camera output using the Vision framework and to classify it with a Core ML model.
 
+## Concepts
+
+As an inexperienced Swift Developer, I have to give credits to some people that understand more of the subject than I do. At the end of this document you will find a list of ressources on the net that I used to create this application. Many thanks to everybody below who helped me to learn about the subject of swift development, howt to create a camera app and how to use on device models to implement object recognition.
+
+The application has two major tasks:
+
+1. Capture images from the camera of the iOS device
+2. Use a trained model to classify objects in the field of view of the camera
+
+One of my design goals was not to use the Storyboard design in xcode, but to create code my views using SwiftUI.
+
+There are two files in the project that keep my code.
+
+**'ContentView.swift'** is the very simple main view of the application.
+**'CamaraViewController.swift'**  
+
+
+### Capture images
+
+### Vision and CoreML
 
 ## List of Ressources
 
@@ -21,6 +41,8 @@ Some background on the MVVM design model. Not used in this app ;-)
 
 A good introduction on how to build a camera app in iOS:
 [Making a Custom Camera in iOS](https://medium.com/@barbulescualex/making-a-custom-camera-in-ios-ea44e3087563) (Alex Barbulescu)
+
+[How to Build a Camara App With SwiftUI](https://medium.com/better-programming/effortless-swiftui-camera-d7a74abde37e) (Rolando Rodriguez)
 
 Sample code from apple:
 [Building a Camera App](https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/avcam_building_a_camera_app)(apple)
