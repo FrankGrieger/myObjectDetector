@@ -23,7 +23,8 @@ One of my design goals was not to use the Storyboard design in xcode, but rather
 There are two files in the project that keep my code.
 
 **`ContentView.swift`** is the very simple main view of the application.
-**`CamaraViewController.swift`** is the file that keeps all the logic. 
+
+**`CameraViewController.swift`** is the file that keeps all the logic. 
 
 ### Capture images
 
