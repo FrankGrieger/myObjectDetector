@@ -30,7 +30,7 @@ There are two files in the project that keep my code.
 
 The application view is a simple swift `VStack` which puts a `CameraViewController` view and two `Text` views on top of each other. The `CameraViewController` view displays what the camera sees. The two `Text` views are labels to display the recognized object and the extimated confidence of the recognition algorithm in percent.
 
-```swift
+```
 VStack{
     CameraViewController()
     Text(classification.object)
