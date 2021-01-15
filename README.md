@@ -15,8 +15,8 @@ As an inexperienced Swift Developer, I have to give credits to some people that 
 
 The application has two major tasks:
 
-1. Capture images from the camera of the iOS device
-2. Use a trained model to classify objects in the field of view of the camera
+1. Capture images from the camera of the iOS device.
+2. Use a trained model to classify objects in the field of view of the camera.
 
 One of my design goals was not to use the Storyboard design in xcode, but rather to code my views using SwiftUI.
 
@@ -40,6 +40,46 @@ VStack{
 
 ### Capture images
 
+In order to connect to input and output of the device camera, the application needs to do the following:
+
+1. An instance of `AVCaptureSession()` is needed to manage capture activity and to coordinate the flow of data from input devices to capture outputs.
+2. The input `AVCaptureDeviceInput` from the device `AVCaptureDevice` has to be connected to the capture session.
+3. The capture data output `AVCaptureVideoDataOutput` has to be observed by all objects that adopt a `AVCaptureVideoDataOutputSampleBufferDelegate` protocol and has to be connected to the capture session too.
+4. An instance of `AVCaptureVideoPreviewLayer` has to be added as sublayer to the `CameraViewController` view to display the device output.
+
+This is done in the `viewWillAppear` method of the `CameraViewController` class. The  `CameraViewController` class is a subclass of  `UIViewController` and `UIViewControllerRepresentable` that object has properties and methods of a `UIViewController` and can be created and managed in the `SwiftUI` interface of the application.
+
+**_Remark:_** `viewWillAppear` does not seem to be the right method to set the bounds of the `previewLayer`. See the answer *How to do this correctly* of Benjohn in the thread [Getting the correct bounds of UIViewController's view](https://stackoverflow.com/questions/11522672/getting-the-correct-bounds-of-uiviewcontrollers-view) on https://stackoverflow.com. Will try this asap.
+
+```swift
+let videoQueue = DispatchQueue(label: "VIDEO_QUEUE")
+let captureSession = AVCaptureSession()
+
+override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    view.backgroundColor = UIColor.black
+    
+    guard let captureDevice = AVCaptureDevice.default(for: .video) else { return }
+    
+    guard let captureInput = try? AVCaptureDeviceInput(device: captureDevice) else { return }
+    
+    captureSession.addInput(captureInput)
+    captureSession.startRunning()
+    
+    let captureDataOutput = AVCaptureVideoDataOutput()
+    captureDataOutput.setSampleBufferDelegate(self, queue: videoQueue)
+    captureSession.addOutput(captureDataOutput)
+    
+    let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+    previewLayer.frame = view.frame
+    view.layer.addSublayer(previewLayer)
+}
+```
+
+To capture the images from the data output, the application needs an object that adopts the `AVCaptureVideoDataOutputSampleBufferDelegate` protocol. In this version of the application it is also the `CameraViewController` class. The method `captureOutput` notifies the delegate that a new video frame was written. The parameters are `captureOutput`, `sampleBuffer` and `connection`.
+
+
 ### Vision and CoreML
 
 ## Sources
@@ -47,7 +87,7 @@ VStack{
 Best way to start out learning swift:
 [100 Days of Swift](https://www.hackingwithswift.com/100/swiftui) (Paul Hudson)
 
-Some background on the MVVM design model. Not used in this app ;-) 
+Some background on the MVVM design model. Not used in this app :;-) 
 [iOS MVVM Tutorial](https://www.raywenderlich.com/6733535-ios-mvvm-tutorial-refactoring-from-mvc) (Chuck Krutsinger)
 
 A good introduction on how to build a camera app in iOS:

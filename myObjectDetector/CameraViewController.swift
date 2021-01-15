@@ -47,8 +47,6 @@ final class CameraViewController: UIViewController {
         super.viewWillDisappear(animated)
         if (captureSession.isRunning) { captureSession.stopRunning() }
     }
-    
-
 }
 
 extension CameraViewController: UIViewControllerRepresentable {
