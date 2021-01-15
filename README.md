@@ -7,11 +7,11 @@ Preprocess camera capture using the Vision framework and classify them with a Co
 The application captures the output of the camera continuously, and uses a Mobile ML model to identify objects.
 
 In SwiftUI  camera support is actually relying on the legacy UIKit class. The app uses a UIViewControllerRepresentable instance to create and manage a UIViewController object in the SwiftUI interface. AVCaptureVideoDataOutputSampleBufferDelegate is used to receive captured video sample buffers.
-CoreML is used to preprocess the camera output using the Vision framework and to classify it with a Core ML model.
+CoreML is used to preprocess the camera output using the Vision framework and to classify it with a ResNet model.
 
 ## Concepts
 
-As an inexperienced Swift Developer, I have to give credits to some people that understand more of the subject than I do. At the end of this document you will find a list of ressources on the net that I used to create this application. Many thanks to everybody below who helped me to learn about the subject of swift development, how to create a camera app and how to use on device models to implement object recognition.
+As an inexperienced Swift Developer, I have to give credits to some people that understand more of the subject than I do. At the end of this document you will find a list of sources on the net that I used to create this application. Many thanks to everybody below who helped me to learn about the subject of swift development, how to create a camera app and how to use on device models to implement object recognition.
 
 The application has two major tasks:
 
@@ -30,7 +30,7 @@ There are two files in the project that keep my code.
 
 ### Vision and CoreML
 
-## List of Ressources
+## Sources
 
 Best way to start out learning swift:
 [100 Days of Swift](https://www.hackingwithswift.com/100/swiftui) (Paul Hudson)
@@ -47,8 +47,8 @@ Also nice to learn about camera apps on iOS devices:
 Sample code from apple:
 [Building a Camera App](https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/avcam_building_a_camera_app)(apple)
 
-Some background on MobileNet:
-[Image Classification with MobileNet](https://medium.com/analytics-vidhya/image-classification-with-mobilenet-cc6fbb2cd470) (Abhijeet Pujara)
+Some background on ResNet:
+[An Overview of ResNet and its Variants](https://towardsdatascience.com/an-overview-of-resnet-and-its-variants-5281e2f56035) (Vincent Fung)
 
 Core ML Framework Documentation:
 [Core ML Documentation](https://developer.apple.com/documentation/coreml) (apple)
