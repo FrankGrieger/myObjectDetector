@@ -77,7 +77,7 @@ override func viewWillAppear(_ animated: Bool) {
 }
 ```
 
-To capture the images from the data output, the application needs an object that adopts the `AVCaptureVideoDataOutputSampleBufferDelegate` protocol. In this version of the application it is also the `CameraViewController` class. The method `captureOutput` notifies the delegate that a new video frame was written. The parameters are `captureOutput`, `sampleBuffer` and `connection`.
+To capture the images from the data output, the application needs an object that adopts the `AVCaptureVideoDataOutputSampleBufferDelegate` protocol. In this version of the application it is also the `CameraViewController` class. The method `captureOutput` notifies the delegate that a new video frame was written. The parameters are `output`, `sampleBuffer` and `connection`.
 
 
 ### Vision and CoreML
