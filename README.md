@@ -96,7 +96,7 @@ let model = try? VNCoreMLModel(for: visionClassifier.model)
 A `VNCoreMLRequest` is created. To retrieve the output, a closure is used which has a `request` object that contains a `results` property. This property is an arry of `VNClassificationObservation` objects.
 The application picks the first item in the list to read the properties `identifier` and `confidence`.
 Since publishing changes from background threads is not allowed, `DispatchQueue.main.async` is used to return from the background thread.
-The `VNImageRequestHandler` of the Vision framework is used to process the `request`.
+The `VNImageRequestHandler` of the Vision framework is used to perform the `request`.
 
 ```swift
 let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
