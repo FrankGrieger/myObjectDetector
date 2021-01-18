@@ -47,21 +47,17 @@ In order to connect to input and output of the device camera, the application ne
 3. The capture data output `AVCaptureVideoDataOutput` has to be observed by all objects that adopt a `AVCaptureVideoDataOutputSampleBufferDelegate` protocol and has to be connected to the capture session too.
 4. An instance of `AVCaptureVideoPreviewLayer` has to be added as sublayer to the `CameraViewController` view to display the device output.
 
-This is done in the `viewWillAppear` method of the `CameraViewController` class. The  `CameraViewController` class is a subclass of  `UIViewController` and `UIViewControllerRepresentable` that object has properties and methods of a `UIViewController` and can be created and managed in the `SwiftUI` interface of the application.
-
-**_Remark:_** `viewWillAppear` does not seem to be the right method to set the bounds of the `previewLayer`. See the answer *How to do this correctly* of Benjohn in the thread [Getting the correct bounds of UIViewController's view](https://stackoverflow.com/questions/11522672/getting-the-correct-bounds-of-uiviewcontrollers-view) on https://stackoverflow.com. Will try this asap.
+This is done in the `viewDidLoad` method of the `CameraViewController` class. The  `CameraViewController` class is a subclass of  `UIViewController` and `UIViewControllerRepresentable` so that the object has properties and methods of a `UIViewController` and can be created and managed in the `SwiftUI` interface of the application. A `videoQueue` is used by the sample buffer delegate in a background thread.
 
 ```swift
 let videoQueue = DispatchQueue(label: "VIDEO_QUEUE")
 let captureSession = AVCaptureSession()
+var previewLayer = AVCaptureVideoPreviewLayer()
 
-override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+override func viewDidLoad() {
+    super.viewDidLoad()
     
-    view.backgroundColor = UIColor.black
-    
-    guard let captureDevice = AVCaptureDevice.default(for: .video) else { return }
-    
+    guard let captureDevice = AVCaptureDevice.default(for: .video) else { return }    
     guard let captureInput = try? AVCaptureDeviceInput(device: captureDevice) else { return }
     
     captureSession.addInput(captureInput)
@@ -71,16 +67,52 @@ override func viewWillAppear(_ animated: Bool) {
     captureDataOutput.setSampleBufferDelegate(self, queue: videoQueue)
     captureSession.addOutput(captureDataOutput)
     
-    let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-    previewLayer.frame = view.frame
+    previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
     view.layer.addSublayer(previewLayer)
 }
 ```
 
-To capture the images from the data output, the application needs an object that adopts the `AVCaptureVideoDataOutputSampleBufferDelegate` protocol. In this version of the application it is also the `CameraViewController` class. The method `captureOutput` notifies the delegate that a new video frame was written. The parameters are `output`, `sampleBuffer` and `connection`.
+To capture the images from the data output, the application needs an object that adopts the `AVCaptureVideoDataOutputSampleBufferDelegate` protocol. In this version of the application it is also the `CameraViewController` class. 
+The method `captureOutput` notifies the delegate that a new video frame was written. The parameter `sampleBuffer` is a `CMSampleBuffer` object containing the video frame data and additional information about the frame.
 
+```swift
+func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection)
+```
+`pixelBuffer` is of type `CVPixelBuffer` and holds a copy of the pixels from `sampleBuffer`  in main memory.
+
+```swift
+let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+```
 
 ### Vision and CoreML
+
+I downloaded a pre trained ResNet50 neural netword classifier from the [apple developer site.](https://developer.apple.com/machine-learning/models/) The model of this classifier is in Core ML format.
+
+The application needs an instance of the classifier to access the model.
+
+```swift
+let visionClassifier: Resnet50 = try! Resnet50(configuration: MLModelConfiguration())
+let model = try? VNCoreMLModel(for: visionClassifier.model)
+```
+
+A `VNCoreMLRequest` is created. To retrieve the output, a closure is used which has a `request` object that contains a `results` property. This property is an arry of `VNClassificationObservation` objects.
+The application picks the first item in the list to read the properties `identifier` and `confidence`.
+Since publishing changes from background threads is not allowed, `DispatchQueue.main.async` is used to return from the background thread.
+
+```swift
+let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
+    guard let results = finishedReq.results as? [VNClassificationObservation] else { return }
+    guard let firstObservation = results.first else { return }
+    
+    let name: String = firstObservation.identifier
+    let conf: VNConfidence = firstObservation.confidence
+    
+    DispatchQueue.main.async {
+        ojectName = name
+        resultConfidence = conf
+    }
+}
+```
 
 ## Sources
 
@@ -104,7 +136,3 @@ Some background on ResNet:
 
 Core ML Framework Documentation:
 [Core ML Documentation](https://developer.apple.com/documentation/coreml) (apple)
-
-Some Core ML Classifiers for the use with CoreML:
-[Core ML Models](https://developer.apple.com/machine-learning/models/) (apple)
-

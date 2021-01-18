@@ -22,13 +22,14 @@ final class CameraViewController: UIViewController {
     let videoQueue = DispatchQueue(label: "VIDEO_QUEUE")
     let captureSession = AVCaptureSession()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    var previewLayer = AVCaptureVideoPreviewLayer()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         view.backgroundColor = UIColor.black
         
         guard let captureDevice = AVCaptureDevice.default(for: .video) else { return }
-        
         guard let captureInput = try? AVCaptureDeviceInput(device: captureDevice) else { return }
         
         captureSession.addInput(captureInput)
@@ -38,15 +39,16 @@ final class CameraViewController: UIViewController {
         captureDataOutput.setSampleBufferDelegate(self, queue: videoQueue)
         captureSession.addOutput(captureDataOutput)
         
-        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.frame
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         view.layer.addSublayer(previewLayer)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if (captureSession.isRunning) { captureSession.stopRunning() }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        previewLayer.frame = view.frame
     }
+    
 }
 
 extension CameraViewController: UIViewControllerRepresentable {
@@ -74,6 +76,7 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             
             let name: String = firstObservation.identifier
             let conf: String = "Confidence: \(firstObservation.confidence * 100)"
+            
             DispatchQueue.main.async {
                 classification.object = name
                 classification.confidence = conf
