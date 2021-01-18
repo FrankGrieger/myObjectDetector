@@ -9,10 +9,10 @@ import SwiftUI
 import AVFoundation
 import Vision
 
-let classification = Classification()
+let classification = ClassificationViewModel()
 let visionClassifier: Resnet50 = try! Resnet50(configuration: MLModelConfiguration())
 
-class Classification: ObservableObject {
+class ClassificationViewModel: ObservableObject {
     @Published var object: String = "Object name"
     @Published var confidence: String = "100%"
 }

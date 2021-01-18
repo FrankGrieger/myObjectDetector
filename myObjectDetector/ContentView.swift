@@ -10,7 +10,7 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @StateObject var classification: Classification
+    @StateObject var classification: ClassificationViewModel
 
     var body: some View {
 
@@ -24,6 +24,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(classification: Classification())
+        ContentView(classification: ClassificationViewModel())
     }
 }
