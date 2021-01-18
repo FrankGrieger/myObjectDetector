@@ -28,7 +28,7 @@ There are two files in the project that keep my code.
 
 ### Application View
 
-The application view is a simple swift `VStack` which puts a `CameraViewController` view and two `Text` views on top of each other. The `CameraViewController` view displays what the camera sees. The two `Text` views are labels to display the recognized object and the extimated confidence of the recognition algorithm in percent.
+The application view is a simple swift `VStack` which puts a `CameraViewController` view and two `Text` views on top of each other. The `CameraViewController` view displays what the camera sees. The two `Text` views are labels to display the recognized object and the estimated confidence of the recognition algorithm in percent.
 
 ```swift
 VStack{
@@ -40,14 +40,12 @@ VStack{
 
 ### Capture images
 
-In order to connect to input and output of the device camera, the application needs to do the following:
-
 1. An instance of `AVCaptureSession()` is needed to manage capture activity and to coordinate the flow of data from input devices to capture outputs.
 2. The input `AVCaptureDeviceInput` from the device `AVCaptureDevice` has to be connected to the capture session.
 3. The capture data output `AVCaptureVideoDataOutput` has to be observed by all objects that adopt a `AVCaptureVideoDataOutputSampleBufferDelegate` protocol and has to be connected to the capture session too.
 4. An instance of `AVCaptureVideoPreviewLayer` has to be added as sublayer to the `CameraViewController` view to display the device output.
 
-This is done in the `viewDidLoad` method of the `CameraViewController` class. The  `CameraViewController` class is a subclass of  `UIViewController` and `UIViewControllerRepresentable` so that the object has properties and methods of a `UIViewController` and can be created and managed in the `SwiftUI` interface of the application. A `videoQueue` is used by the sample buffer delegate in a background thread.
+This is done in the `viewDidLoad` method of the `CameraViewController` class. The  `CameraViewController` class is a subclass of  `UIViewController` and `UIViewControllerRepresentable`, so that the object has properties and methods of a `UIViewController` and can be created and managed in the `SwiftUI` interface of the application. A `videoQueue` is used by the sample buffer delegate in a background thread.
 
 ```swift
 let videoQueue = DispatchQueue(label: "VIDEO_QUEUE")
@@ -86,7 +84,7 @@ let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
 
 ### Vision and CoreML
 
-I downloaded a pre trained ResNet50 neural netword classifier from the [apple developer site.](https://developer.apple.com/machine-learning/models/) The model of this classifier is in Core ML format.
+I downloaded a pre trained ResNet50 neural network classifier from the [apple developer site.](https://developer.apple.com/machine-learning/models/) The model of this classifier is in Core ML format.
 
 The application needs an instance of the classifier to access the model.
 
@@ -98,6 +96,7 @@ let model = try? VNCoreMLModel(for: visionClassifier.model)
 A `VNCoreMLRequest` is created. To retrieve the output, a closure is used which has a `request` object that contains a `results` property. This property is an arry of `VNClassificationObservation` objects.
 The application picks the first item in the list to read the properties `identifier` and `confidence`.
 Since publishing changes from background threads is not allowed, `DispatchQueue.main.async` is used to return from the background thread.
+The `VNImageRequestHandler` of the Vision framework is used to process the `request`.
 
 ```swift
 let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
@@ -112,6 +111,8 @@ let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
         resultConfidence = conf
     }
 }
+
+try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
 ```
 
 ## Sources
