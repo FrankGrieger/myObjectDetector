@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551820CD25B72DB400B598A2 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551820CC25B72DB400B598A2 /* CameraModel.swift */; };
+		551820D025B7392B00B598A2 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551820CF25B7392B00B598A2 /* CameraView.swift */; };
 		554B4EFF25A5978800CF2E2C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B4EFE25A5978800CF2E2C /* CameraViewController.swift */; };
 		556E44D925936D58008EBF4C /* myObjectDetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */; };
 		556E44DB25936D58008EBF4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556E44DA25936D58008EBF4C /* ContentView.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		551820CC25B72DB400B598A2 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		551820CF25B7392B00B598A2 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		554B4EFE25A5978800CF2E2C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		556E44D525936D58008EBF4C /* myObjectDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myObjectDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myObjectDetectorApp.swift; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 				556E44D825936D58008EBF4C /* myObjectDetectorApp.swift */,
 				556E44DA25936D58008EBF4C /* ContentView.swift */,
 				554B4EFE25A5978800CF2E2C /* CameraViewController.swift */,
+				551820CF25B7392B00B598A2 /* CameraView.swift */,
+				551820CC25B72DB400B598A2 /* CameraModel.swift */,
 				55A9538F25A6E48A00D1E564 /* Supporting Files */,
 				556E44DE25936D59008EBF4C /* Preview Content */,
 			);
@@ -158,6 +164,8 @@
 			files = (
 				55A9538C25A6DAEF00D1E564 /* Resnet50.mlmodel in Sources */,
 				556E44DB25936D58008EBF4C /* ContentView.swift in Sources */,
+				551820CD25B72DB400B598A2 /* CameraModel.swift in Sources */,
+				551820D025B7392B00B598A2 /* CameraView.swift in Sources */,
 				556E44D925936D58008EBF4C /* myObjectDetectorApp.swift in Sources */,
 				554B4EFF25A5978800CF2E2C /* CameraViewController.swift in Sources */,
 			);

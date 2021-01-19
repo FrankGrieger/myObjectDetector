@@ -12,7 +12,7 @@ struct myObjectDetectorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(classification: classification)
+            ContentView()
         }
     }
 }
