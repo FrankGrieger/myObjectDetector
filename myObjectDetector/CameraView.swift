@@ -39,7 +39,7 @@ struct CameraPreview: UIViewRepresentable {
         camera.preview.videoGravity = .resizeAspectFill
  
         view.layer.addSublayer(camera.preview)
- 
+        
         return view
     }
     
