@@ -2,7 +2,7 @@
 //  CameraView.swift
 //  myObjectDetector
 //
-//  Created by Frank Grieger on 19.01.21.
+//  Created by Frank Grieger on 23.12.20.
 //
 
 import Foundation
@@ -29,7 +29,7 @@ struct CameraView: View {
 struct CameraPreview: UIViewRepresentable {
     
     @ObservedObject var camera: CameraModel
-    
+        
     func makeUIView(context: Context) -> UIView {
         
         let view = UIView()
@@ -37,9 +37,9 @@ struct CameraPreview: UIViewRepresentable {
         
         camera.preview = AVCaptureVideoPreviewLayer(session: camera.session)
         camera.preview.videoGravity = .resizeAspectFill
-        
+ 
         view.layer.addSublayer(camera.preview)
-        
+ 
         return view
     }
     

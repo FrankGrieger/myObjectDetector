@@ -2,7 +2,7 @@
 //  CameraModel.swift
 //  myObjectDetector
 //
-//  Created by Frank Grieger on 19.01.21.
+//  Created by Frank Grieger on 23.12.20.
 //
 
 //import Foundation
@@ -11,23 +11,23 @@ import AVFoundation
 import Vision
 
 class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate {
-    @Published var session = AVCaptureSession()
-    @Published var output = AVCaptureVideoDataOutput()
-    
+
+    let session = AVCaptureSession()
+    let videoQueue = DispatchQueue(label: "VIDEO_QUEUE")
+    let visionClassifier: Resnet50 = try! Resnet50(configuration: MLModelConfiguration())
+
     @Published var preview: AVCaptureVideoPreviewLayer!
-    
     @Published var identifier = "Frank"
     @Published var confidence = "Not so sure!"
     
-    let videoQueue = DispatchQueue(label: "VIDEO_QUEUE")
-    let visionClassifier: Resnet50 = try! Resnet50(configuration: MLModelConfiguration())
-    
     func setUpSession() {
+        
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         guard let input = try? AVCaptureDeviceInput(device: device) else { return }
+        let output = AVCaptureVideoDataOutput()
         
         self.session.addInput(input)
-        self.session.addOutput(self.output)
+        self.session.addOutput(output)
         
         output.setSampleBufferDelegate(self, queue: videoQueue)
         
