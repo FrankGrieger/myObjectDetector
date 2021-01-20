@@ -27,14 +27,15 @@ class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBuf
         guard let input = try? AVCaptureDeviceInput(device: device) else { return }
         
         self.session.addInput(input)
-        self.session.startRunning()
+        self.session.addOutput(self.output)
         
         output.setSampleBufferDelegate(self, queue: videoQueue)
-        self.session.addOutput(self.output)
+        
+        self.session.startRunning()
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        /*
+
         guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         guard let model = try? VNCoreMLModel(for: visionClassifier.model) else { return }
         
@@ -45,13 +46,12 @@ class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBuf
             let name: String = firstObservation.identifier
             let conf: String = "Confidence: \(firstObservation.confidence * 100)"
             
-            //DispatchQueue.main.async {
-                classification.object = name
-                classification.confidence = conf
-            //}
+            DispatchQueue.main.async {
+                self.identifier = name
+                self.confidence = conf
+            }
         }
         
         try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
- */
     }
 }

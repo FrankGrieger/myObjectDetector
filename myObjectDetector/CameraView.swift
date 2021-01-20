@@ -26,6 +26,12 @@ struct CameraView: View {
     }
 }
 
+final class TestCameraViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
 struct CameraPreview: UIViewRepresentable {
     
     @ObservedObject var camera: CameraModel
@@ -38,12 +44,14 @@ struct CameraPreview: UIViewRepresentable {
         camera.preview = AVCaptureVideoPreviewLayer(session: camera.session)
         camera.preview.frame = view.frame
         
+        //camera.preview.videoGravity = .resizeAspectFill
+        
         view.layer.addSublayer(camera.preview)
         
         return view
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        
+
     }
 }
