@@ -36,6 +36,7 @@ struct CameraPreview: UIViewRepresentable {
         view.backgroundColor = UIColor.black
         
         camera.preview = AVCaptureVideoPreviewLayer(session: camera.session)
+        camera.preview.frame = view.frame
         
         view.layer.addSublayer(camera.preview)
         
