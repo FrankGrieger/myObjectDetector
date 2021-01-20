@@ -12,6 +12,7 @@ import Vision
 
 class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     @Published var session = AVCaptureSession()
+    @Published var output = AVCaptureVideoDataOutput()
     
     @Published var preview: AVCaptureVideoPreviewLayer!
     
@@ -25,13 +26,11 @@ class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBuf
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         guard let input = try? AVCaptureDeviceInput(device: device) else { return }
         
-        let output = AVCaptureVideoDataOutput()
-        
         self.session.addInput(input)
         self.session.startRunning()
         
         output.setSampleBufferDelegate(self, queue: videoQueue)
-        self.session.addOutput(output)
+        self.session.addOutput(self.output)
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
