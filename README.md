@@ -6,12 +6,12 @@ Preprocess camera capture using the Vision framework and classify them with a Co
 
 The application captures the output of the camera continuously, and uses a Mobile ML model to identify objects.
 
-In SwiftUI  camera support is actually relying on the legacy UIKit class. The app uses a UIViewControllerRepresentable instance to create and manage a UIViewController object in the SwiftUI interface. AVCaptureVideoDataOutputSampleBufferDelegate is used to receive captured video sample buffers.
+In SwiftUI  camera support is actually relying on the legacy UIKit class. The app uses a UIViewRepresentable instance to create and manage a UIView object in the SwiftUI interface. AVCaptureVideoDataOutputSampleBufferDelegate is used to receive captured video sample buffers.
 CoreML is used to preprocess the camera output using the Vision framework and to classify it with a ResNet model.
 
 ## Concepts
 
-As an inexperienced Swift Developer, I have to give credits to some people that understand more of the subject than I do. At the end of this document you will find a list of sources on the net that I used to create this application. Many thanks to everybody below who helped me to learn about the subject of swift development, how to create a camera app and how to use on device models to implement object recognition.
+As an inexperienced Swift Developer, I have to give credits to some people that understand more of the subject than I do. At the end of this document you will find a list of sources that I used to create this application. Many thanks to everybody below who helped me to learn about the subject.
 
 The application has two major tasks:
 
@@ -43,7 +43,7 @@ VStack{
 1. An instance of `AVCaptureSession()` is needed to manage capture activity and to coordinate the flow of data from input devices to capture outputs.
 2. The input `AVCaptureDeviceInput` from the device `AVCaptureDevice` has to be connected to the capture session.
 3. The capture data output `AVCaptureVideoDataOutput` has to be observed by all objects that adopt a `AVCaptureVideoDataOutputSampleBufferDelegate` protocol and has to be connected to the capture session too.
-4. An instance of `AVCaptureVideoPreviewLayer` has to be added as sublayer to the `CameraView` view to display the device output.
+4. An instance of `AVCaptureVideoPreviewLayer` has to be added as sublayer to the `CameraView` view to display the device input.
 
 The session is created together with the `CameraModel`. The method `setUpSession()` is called inside `.onAppear` of the `CameraView`. This configures the session when the view appears.
 
@@ -92,7 +92,7 @@ let model = try? VNCoreMLModel(for: visionClassifier.model)
 
 A `VNCoreMLRequest` is created. To retrieve the output, a closure is used which has a `request` object that contains a `results` property. This property is an arry of `VNClassificationObservation` objects.
 The application picks the first item in the list to read the properties `identifier` and `confidence`. The `VNImageRequestHandler` of the Vision framework is used to perform the `request`.
-To publish the changes `DispatchQueue.main.async` is used to return from the background thread.
+To publish the changes `DispatchQueue.main.async` is used to return the results from the background thread.
 
 ```swift
 let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
