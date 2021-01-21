@@ -126,7 +126,10 @@ Also nice to learn about camera apps on iOS devices:
 [How to Build a Camara App With SwiftUI](https://medium.com/better-programming/effortless-swiftui-camera-d7a74abde37e) (Rolando Rodriguez)
 
 Sample code from apple:
-[Building a Camera App](https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/avcam_building_a_camera_app)(apple)
+[Building a Camera App](https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/avcam_building_a_camera_app) (apple)
+
+Sample code from apple:
+[Recognizing Object in Live Capture](https://developer.apple.com/documentation/vision/recognizing_objects_in_live_capture) (apple)
 
 Some background on ResNet:
 [An Overview of ResNet and its Variants](https://towardsdatascience.com/an-overview-of-resnet-and-its-variants-5281e2f56035) (Vincent Fung)

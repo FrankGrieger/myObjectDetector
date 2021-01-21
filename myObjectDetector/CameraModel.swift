@@ -22,9 +22,13 @@ class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBuf
     
     func setUpSession() {
         
+        // to find all capture devices one could use a device discovery session: AVCaptureDevice.DiscoverySession(...)
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         guard let input = try? AVCaptureDeviceInput(device: device) else { return }
         let output = AVCaptureVideoDataOutput()
+        
+        // recognition is more effective with a lower resolution, since model was trained with small pictures (224 x 224)
+        session.sessionPreset = .vga640x480
         
         self.session.addInput(input)
         self.session.addOutput(output)
