@@ -61,9 +61,6 @@ func setUpSession() {
     
     // let the sample buffer delegate use the video queue to capture images in the background
     output.setSampleBufferDelegate(self, queue: videoQueue)
-    
-    // start the session
-    self.session.startRunning()
 }
 ```
 
