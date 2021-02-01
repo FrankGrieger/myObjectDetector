@@ -9,25 +9,6 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-struct CameraView: View {
-    
-    @StateObject var camera = CameraModel()
-    
-    var body: some View {
-        
-        VStack {
-            CameraPreview(camera: camera)
-            Text(camera.identifier)
-            Text(camera.confidence)
-        }
-        .onAppear(perform: {
-            
-            // Set up the session when the view appears
-            camera.prepareCapture()
-        })
-    }
-}
-
 struct CameraPreview: UIViewRepresentable {
     
     @ObservedObject var camera: CameraModel

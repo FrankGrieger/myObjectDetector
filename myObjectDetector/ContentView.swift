@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var camera = CameraModel()
 
     var body: some View {
-        CameraView()
+        
+        VStack {
+            CameraPreview(camera: camera)
+            Text(camera.identifier)
+            Text(camera.confidence)
+        }
+
     }
 }
 
