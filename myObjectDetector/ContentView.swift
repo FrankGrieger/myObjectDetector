@@ -18,6 +18,9 @@ struct ContentView: View {
             Text(camera.identifier)
             Text(camera.confidence)
         }
+        .onAppear(perform: {
+            camera.prepareCapture()
+        })
 
     }
 }
