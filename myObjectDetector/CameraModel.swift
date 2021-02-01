@@ -5,7 +5,6 @@
 //  Created by Frank Grieger on 23.12.20.
 //
 
-//import Foundation
 import SwiftUI
 import AVFoundation
 import Vision
